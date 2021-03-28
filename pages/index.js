@@ -1,65 +1,44 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import Head from "next/head";
+import useSWR from "swr";
+import styles from "../styles/Home.module.css";
+import {
+  Image,
+  Transformation,
+  CloudinaryContext,
+  Placeholder,
+} from "cloudinary-react";
 
 export default function Home() {
+  const { data, error } = useSWR("/api/getAllPhotos");
+
+  if (error) return <div>failed to load</div>;
+  if (!data) return <div>loading...</div>;
+
   return (
     <div className={styles.container}>
       <Head>
-        <title>Create Next App</title>
+        <title> Next Image Gallery with Cloudinary & Lightroom</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          Welcome to
+          <a href="https://cloudinary.com">
+            Next Image Gallery with Cloudinary & Lightroom
+          </a>
         </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
+          <CloudinaryContext  className={styles.grid} cloudName={process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD}>
+            {data != undefined &&
+              data.resources.map((pic) => (
+                  <Image key={pic.public_id} className={styles.card} publicId={pic.public_id} loading="lazy" secure="true">
+                    <Transformation width="800" crop="fill" />
+                    <Placeholder type="blur" />
+                    {/* <Transformation effect="lightroom:saturation_-100:clarity_25:contrast_73:vignetteamount_60" /> */}
+                  </Image>
+              ))}
+          </CloudinaryContext>
       </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
     </div>
-  )
+  );
 }
