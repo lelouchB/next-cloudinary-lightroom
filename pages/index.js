@@ -44,6 +44,7 @@ export default function Home() {
                 aspectRatio="16:9"
                 crop="fill"
                 loading="lazy"
+                alt={pic.public_id}
               >
                 <Transformation effect="lightroom:whitebalance_auto" />
                 <Transformation height="600" />
