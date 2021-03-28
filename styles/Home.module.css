@@ -76,7 +76,7 @@
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    max-width: 900px;
+    max-width: 1200px;
     margin-top: 3rem;
 }
 
@@ -86,7 +86,7 @@
     padding: 0.5rem;
     text-align: center;
     color: inherit;
-    max-width: 400px;
+    max-width: 500px;
     text-decoration: none;
     border: 1px solid #eaeaea;
     border-radius: 10px;

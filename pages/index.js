@@ -1,6 +1,5 @@
 import Head from "next/head";
 import useSWR from "swr";
-import Link from "next/link";
 import styles from "../styles/Home.module.css";
 import {
   Image,
@@ -24,7 +23,7 @@ export default function Home() {
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to{" "}
+         
           <a href="https://cloudinary.com">
             Image Gallery - Cloudinary & Lightroom{" "}
           </a>
@@ -35,24 +34,21 @@ export default function Home() {
         >
           {data != undefined &&
             data.resources.map((pic) => (
-              <Link key={pic.public_id} href={`/${pic.public_id}`}>
-                <a>
-                  <Image
-                    className={styles.card}
-                    publicId={pic.public_id}
-                    secure="true"
-                  >
-                    <Transformation effect="lightroom:whitebalance_auto" />
-
-                    <Transformation
-                      width="800"
-                      fetchFormat="auto"
-                      crop="fill"
-                    />
-                    <Placeholder type="blur" />
-                  </Image>
-                </a>
-              </Link>
+              <Image
+                key={pic.public_id}
+                className={styles.card}
+                publicId={pic.public_id}
+                secure="true"
+                width="800"
+                fetchFormat="auto"
+                aspectRatio="16:9"
+                crop="fill"
+                loading="lazy"
+              >
+                <Transformation effect="lightroom:whitebalance_auto" />
+                <Transformation height="600" />
+                <Placeholder type="blur" />
+              </Image>
             ))}
         </CloudinaryContext>
       </main>
