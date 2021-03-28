@@ -12,6 +12,7 @@ export default async (req, res) => {
       res.status(200).json(result);
     }
     if (error) {
+      console.error(error)
       res.status(404).json(error);
     }
   });
