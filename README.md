@@ -1,3 +1,8 @@
+![Next - Cloudinary Image Gallery](https://i.imgur.com/khPbJJT.png)
+
+An Image Gallery built with [Next.js](https://nextjs.org/) using [Cloudinary](https://cloudinary.com/) and [Adobe Lightroom](https://cloudinary.com/documentation/adobe_photoshop_lightroom_addon).
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
