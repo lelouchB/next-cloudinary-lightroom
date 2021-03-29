@@ -1,3 +1,4 @@
+// pages/api/getAllPhotos.js
 var cloudinary = require("cloudinary").v2;
 
 cloudinary.config({

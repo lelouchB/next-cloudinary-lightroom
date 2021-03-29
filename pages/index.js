@@ -32,7 +32,7 @@ export default function Home() {
           className={styles.grid}
           cloudName={process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD}
         >
-          {data != undefined &&
+          {data !== undefined &&
             data.resources.map((pic) => (
               <Image
                 key={pic.public_id}
@@ -46,7 +46,8 @@ export default function Home() {
                 loading="lazy"
                 alt={pic.public_id}
               >
-                <Transformation effect="lightroom:whitebalance_auto" />
+                {/* <Transformation effect="lightroom:saturation_-100" /> */}
+                <Transformation effect="lightroom:xmp:sepia_deep.xmp" />
                 <Transformation height="600" />
                 <Placeholder type="blur" />
               </Image>
